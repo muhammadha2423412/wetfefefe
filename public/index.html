@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comment System</title>
+</head>
+<body>
+  <h1>Comment System</h1>
+  
+  <!-- Display existing comments -->
+  <div id="comments-container"></div>
+
+  <!-- Comment form -->
+  <form action="/comment" method="post">
+    <label for="comment">Leave a comment:</label>
+    <textarea id="comment" name="comment" rows="4" cols="50" required></textarea>
+    <br>
+    <button type="submit">Submit Comment</button>
+  </form>
+
+  <script>
+    // Fetch and display comments using JavaScript
+    fetch('/comments')
+      .then(response => response.json())
+      .then(comments => {
+        const commentsContainer = document.getElementById('comments-container');
+        commentsContainer.innerHTML = '<h2>Comments</h2>';
+        comments.forEach(comment => {
+          commentsContainer.innerHTML += `<p>${comment}</p>`;
+        });
+      });
+  </script>
+</body>
+</html>
